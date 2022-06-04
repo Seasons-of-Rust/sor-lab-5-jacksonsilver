@@ -1,7 +1,7 @@
 use personnel::AstronautJob;
 use personnel::Candidate;
 
-fn get_job_code(job: AstronautJob) -> i32 {
+fn get_job_code(job: &AstronautJob) -> i32 {
     match job {
         AstronautJob::Biogeochemist => 251,
         AstronautJob::Biologist => 257,
@@ -14,20 +14,28 @@ fn get_job_code(job: AstronautJob) -> i32 {
     }
 }
 
-fn calculate_job_score(_candidate: &Candidate) {
-    let mut job_score = get_job_code((&_candidate).primary_job)
-        * match _candidate.secondary_job == None {
-            true => get_job_code((&_candidate).primary_job),
-            false => get_job_code((&_candidate).secondary_job.unwrap()),
+fn calculate_job_score(_candidate: &Candidate) -> i32{
+    let job_score = get_job_code(&_candidate.primary_job)
+        * match &_candidate.secondary_job {
+            None => get_job_code(&_candidate.primary_job),
+            Some(v) => get_job_code(&v),
         };
+    job_score % 576
+}
 
-    if job_score > 576 {
-        job_score = job_score % 576;
-    }
+fn calculate_candidate_score(_candidate: &Candidate) -> i32{
+    let candidate_score: i32 = (_candidate.health as i32 + calculate_job_score(&_candidate)) * _candidate.age as i32;
+    candidate_score % 3928
 }
 
 fn main() {
-    let _candidates = Candidate::load_candidate_file();
+    let _candidates: Vec<Candidate> = Candidate::load_candidate_file();
 
-    calculate_job_score(&_candidates[1]);
+    _candidates.sort_by(|a, b| calculate_candidate_score(a) > calculate_candidate_score(b));
+
+
+
+
+
+    
 }
