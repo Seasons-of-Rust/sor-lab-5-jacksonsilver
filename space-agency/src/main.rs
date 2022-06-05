@@ -29,13 +29,8 @@ fn calculate_candidate_score(_candidate: &Candidate) -> i32{
 }
 
 fn main() {
-    let _candidates: Vec<Candidate> = Candidate::load_candidate_file();
+    let mut _candidates: Vec<Candidate> = Candidate::load_candidate_file();
 
-    _candidates.sort_by(|a, b| calculate_candidate_score(a) > calculate_candidate_score(b));
+    _candidates.sort_by(|a, b| calculate_candidate_score(b).cmp(&calculate_candidate_score(a)));
 
-
-
-
-
-    
 }
