@@ -38,3 +38,4 @@ fn main() {
     _candidates.sort_by_key(|b| Reverse(calculate_candidate_score(b)));
 
 }
+

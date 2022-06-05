@@ -2,4 +2,5 @@
 members = [
     "space-agency",
     "personnel",
+    "tests",
 ]
