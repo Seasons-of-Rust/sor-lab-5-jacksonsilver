@@ -36,6 +36,4 @@ fn main() {
     // _candidates.sort_by(|a, b| calculate_candidate_score(b).cmp(&calculate_candidate_score(a)));
     // Cargo Clippy told me to do this:
     _candidates.sort_by_key(|b| Reverse(calculate_candidate_score(b)));
-
 }
-
