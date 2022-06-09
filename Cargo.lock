@@ -12,3 +12,11 @@ version = "0.1.0"
 dependencies = [
  "personnel",
 ]
+
+[[package]]
+name = "tests"
+version = "0.1.0"
+dependencies = [
+ "personnel",
+ "space-agency",
+]
